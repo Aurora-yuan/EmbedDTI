@@ -1,0 +1,2 @@
+dataset,model,rmse,mse,pearson,spearman,ci
+davis,GCNNet_Pre,0.479,0.229,0.845,0.702,0.892

@@ -1,0 +1,2 @@
+dataset,model,rmse,mse,pearson,spearman,ci
+kiba,GCNNet_Attn,0.39,0.152,0.881,0.871,0.879
