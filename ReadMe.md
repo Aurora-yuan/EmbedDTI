@@ -9,7 +9,7 @@ This study proposes a new model called EmbedDTI to enhance the representation fo
 
 ### Models
 
-我们提供了一下几个模型：
+We provide the following models:
 
 * EmbedDTI_ori:  i.e, EmbedDTI_noPre mentioned in EmbedDTI paper, we represent the original protein sequence in one-hot vector and represent the input vector as a random embedding vector through an embedding layer to input it into the CNN module. For drugs, we convert their SMILES sequences into two graph structures (atom and substructure) to retain as much structural information as possible for feature learning. 
 * EmbedDTI_pre: i.e, EmbedDTI_noAttn mentioned in EmbedDTI paper. For protein sequences, we use the GloVe algorithm to obtain the pre-trained embedding representations of amino acids. The drug part is the same as EmbedDTI_ori.
