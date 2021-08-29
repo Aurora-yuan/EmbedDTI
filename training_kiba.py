@@ -95,19 +95,16 @@ else:
     for epoch in range(NUM_EPOCHS):
         train(model, device, train_loader, optimizer, epoch+1)
         G,P = predicting(model, device, test_loader)
-        # ret = [rmse(G,P),mse(G,P),pearson(G,P),spearman(G,P),ci(G,P)]
-        ret = [mse(G,P)]
-        print('epoch:',epoch+1,'mse:',ret[0])
+        ret = [rmse(G,P),mse(G,P),pearson(G,P),spearman(G,P),ci(G,P)]
+        print('epoch:',epoch+1,'mse:',ret[1],'ci:',ret[-1])
         with open(result,'a') as file:
-            file.write(str(epoch+1) + ','+ str(ret[0]) + '\n')
-        if ret[0]<=best_mse:
+            file.write(str(epoch+1) + ','+ str(ret[1]) + ',' + str(ret[-1]) + '\n')
+        if ret[1]<=best_mse:
             torch.save(model.state_dict(), model_file_name)
             best_epoch = epoch+1
-            best_mse = ret[0]
-            # best_ci = ret[-1]
-            # print(model_st,'rmse improved at epoch ', best_epoch, '; best_mse,best_ci:', best_mse,best_ci)
-            print(model_st,'rmse improved at epoch ', best_epoch, '; best_mse:', best_mse)
+            best_mse = ret[1]
+            best_ci = ret[-1]
+            print(model_st,'rmse improved at epoch ', best_epoch, '; best_mse,best_ci:', best_mse,best_ci)
         else:
-            # print(model_st,"current mse: ", ret[0],'No improvement since epoch ', best_epoch, '; best_mse,best_ci:', best_mse,best_ci)
-            print(model_st,"current mse: ", ret[0],'No improvement since epoch ', best_epoch, '; best_mse:', best_mse)
+            print(model_st,"current mse: ", ret[1],'No improvement since epoch ', best_epoch, '; best_mse,best_ci:', best_mse,best_ci)
     print('train success!')
