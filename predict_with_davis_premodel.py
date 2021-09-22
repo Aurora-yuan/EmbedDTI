@@ -4,7 +4,7 @@ import sys, os
 from random import shuffle
 import torch
 import torch.nn as nn
-from models.gcn_pre import GCNNet_Pre
+from models.gcn_pre import EmbedDTI_Pre
 from utils import *
 
 
@@ -24,7 +24,7 @@ def predicting(model, device, loader):
     return total_labels.numpy().flatten(),total_preds.numpy().flatten()
 
 
-modeling = [GCNNet_Pre][int(sys.argv[1])]
+modeling = [EmbedDTI_Pre][int(sys.argv[1])]
 cuda_name = "cuda:1"
 
 TEST_BATCH_SIZE = 512
@@ -46,7 +46,7 @@ else:
     # training the model
     device = torch.device(cuda_name if torch.cuda.is_available() else "cpu")
     model = modeling().to(device)
-    model_file_name = 'models/model_GCNNet_davis_pre.model'
+    model_file_name = 'models/model_EmbedDTI_davis_pre.model'
     if os.path.isfile(model_file_name):            
         model.load_state_dict(torch.load(model_file_name))
         G,P = predicting(model, device, test_loader)

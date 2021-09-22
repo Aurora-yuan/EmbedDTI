@@ -8,10 +8,10 @@ import numpy as np
 dtype=torch.float32
 
 # GCN based model
-class GCNNet_Ori(torch.nn.Module):
+class EmbedDTI_Ori(torch.nn.Module):
     def __init__(self, n_output=1, n_filters=32, embed_dim=128, num_features_xd=101, num_features_xt=25, num_features_xc=35, output_dim=128, dropout=0.2):
 
-        super(GCNNet_Ori, self).__init__()
+        super(EmbedDTI_Ori, self).__init__()
 
         # SMILES graph branch
         self.n_output = n_output

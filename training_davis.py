@@ -4,9 +4,9 @@ import sys, os
 from random import shuffle
 import torch
 import torch.nn as nn
-from models.gcn_ori import GCNNet_Ori
-from models.gcn_pre import GCNNet_Pre
-from models.gcn_attn import GCNNet_Attn
+from models.gcn_ori import EmbedDTI_Ori
+from models.gcn_pre import EmbedDTI_Pre
+from models.gcn_attn import EmbedDTI_Attn
 from utils import *
 
 # training function at each epoch
@@ -43,7 +43,7 @@ def predicting(model, device, loader):
     return total_labels.numpy().flatten(),total_preds.numpy().flatten()
 
 
-modeling = [GCNNet_Ori,GCNNet_Pre,GCNNet_Attn][int(sys.argv[1])] # 命令行中传入的第一个参数
+modeling = [EmbedDTI_Ori,EmbedDTI_Pre,EmbedDTI_Attn][int(sys.argv[1])] # 命令行中传入的第一个参数
 model_st = modeling.__name__
 
 cuda_name = "cuda:0"
@@ -87,8 +87,8 @@ else:
     best_mse = 1000
     best_ci = 0
     best_epoch = -1
-    model_file_name = model_st + '_davis.model'
-    result = 'result_'+ model_st + '_davis.csv'
+    model_file_name = 'models/' + model_st + '_davis.model'
+    result = 'training_result_'+ model_st + '_davis.csv'
     with open(result,'a') as file:
         file.write('epoch' + ','+ 'mse' + ',' + 'ci' + '\n')
     for epoch in range(NUM_EPOCHS):
